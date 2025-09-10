@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Krishi Officer | VisionX - SIH 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Earthy Tech -->
+    <!-- Application Structure Plan: The application is designed as a single-page exploratory narrative with a fixed top navigation, allowing users to either scroll through the story or jump directly to sections of interest (The Challenge, Solution, How it Works, etc.). This non-linear structure is more engaging than a simple slide-by-slide presentation and better suited for a web experience, enabling stakeholders to quickly access the information they find most relevant. The flow guides the user from the problem to the solution and its implementation, creating a comprehensive project overview. -->
+    <!-- Visualization & Content Choices: Report Info -> The core challenges faced by farmers. Goal -> Inform and build empathy. Viz/Presentation -> Thematic icon-driven cards for quick comprehension. Interaction -> Subtle hover effects for engagement. | Report Info -> System Architecture. Goal -> Organize and explain a technical process simply. Viz/Presentation -> A custom-built flowchart using HTML/CSS to visualize the data flow from user to system. Interaction -> Sequential fade-in animations on scroll to guide the user's eye. | Report Info -> Development Roadmap. Goal -> Show change over time. Viz/Presentation -> An interactive Gantt-style chart using Chart.js. Interaction -> Users can click on phases to see detailed descriptions, making a static timeline dynamic and data-rich. Library -> Chart.js. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #383838;
+        }
+        .nav-link.active {
+            color: #22C55E;
+            font-weight: 600;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-green-600">Digital Krishi Officer</h1>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#challenge" class="nav-link text-gray-600 hover:text-green-600 transition-colors duration-300">The Challenge</a>
+                <a href="#solution" class="nav-link text-gray-600 hover:text-green-600 transition-colors duration-300">Our Solution</a>
+                <a href="#architecture" class="nav-link text-gray-600 hover:text-green-600 transition-colors duration-300">How It Works</a>
+                <a href="#roadmap" class="nav-link text-gray-600 hover:text-green-600 transition-colors duration-300">Roadmap</a>
+                <a href="#vision" class="nav-link text-gray-600 hover:text-green-600 transition-colors duration-300">Future Vision</a>
+            </nav>
+            <div class="md:hidden">
+                 <span class="text-sm font-semibold text-gray-500">Team VisionX</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="pt-24 pb-16 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <span class="text-green-600 font-semibold">SMART INDIA HACKATHON 2025 | TEAM VISIONX</span>
+                <h2 class="text-4xl md:text-6xl font-extrabold my-4 leading-tight">Empowering Farmers with AI-Driven Advice</h2>
+                <p class="max-w-3xl mx-auto text-lg text-gray-600">
+                    Introducing the Digital Krishi Officer: An intelligent, multilingual advisory system providing instant, personalized support to farmers, right when they need it.
+                </p>
+            </div>
+        </section>
+
+        <section id="challenge" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold mb-2">The Farmer's Silent Struggle</h3>
+                    <p class="max-w-2xl mx-auto text-gray-600">Farmers form the backbone of our nation, yet they face persistent challenges that hinder their productivity and livelihood. We aim to solve these core issues.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in">
+                        <div class="text-5xl mb-4 text-orange-500">?</div>
+                        <h4 class="text-xl font-bold mb-2">Inaccessible Expertise</h4>
+                        <p class="text-gray-600">Crucial advice on pests, weather, and market trends is often delayed or completely out of reach, leading to crop loss and reduced income.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in" style="transition-delay: 200ms;">
+                        <div class="text-5xl mb-4 text-orange-500"> overworked </div>
+                        <h4 class="text-xl font-bold mb-2">Overburdened Systems</h4>
+                        <p class="text-gray-600">Agricultural officers and support helplines are stretched thin, unable to provide the personalized attention each farmer requires.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 fade-in" style="transition-delay: 400ms;">
+                         <div class="text-5xl mb-4 text-orange-500"> barrier </div>
+                        <h4 class="text-xl font-bold mb-2">Communication Gaps</h4>
+                        <p class="text-gray-600">Diverse languages, varying literacy levels, and a lack of localized advice create a significant barrier to effective communication.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="solution" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold mb-2">Our Solution: The Digital Krishi Officer</h3>
+                    <p class="max-w-2xl mx-auto text-gray-600">We bridge the gap with an AI-powered system designed for accessibility and accuracy, delivering expert knowledge directly to the farmer's hands.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="p-6 rounded-lg bg-green-50 fade-in"><h5 class="font-bold text-green-800">Natural Language Queries</h5><p class="text-sm text-green-700">Farmers can ask questions in Malayalam using voice or text.</p></div>
+                    <div class="p-6 rounded-lg bg-green-50 fade-in" style="transition-delay: 100ms;"><h5 class="font-bold text-green-800">Multimodal Inputs</h5><p class="text-sm text-green-700">Upload images of crops or pests for instant analysis and advice.</p></div>
+                    <div class="p-6 rounded-lg bg-green-50 fade-in" style="transition-delay: 200ms;"><h5 class="font-bold text-green-800">AI Knowledge Engine</h5><p class="text-sm text-green-700">Powered by fine-tuned LLMs trained on extensive agricultural data.</p></div>
+                    <div class="p-6 rounded-lg bg-green-50 fade-in" style="transition-delay: 300ms;"><h5 class="font-bold text-green-800">Context-Aware Advice</h5><p class="text-sm text-green-700">Considers location, crop type, season, and history for tailored support.</p></div>
+                    <div class="p-6 rounded-lg bg-green-50 fade-in" style="transition-delay: 400ms;"><h5 class="font-bold text-green-800">Expert Escalation System</h5><p class="text-sm text-green-700">Complex queries are seamlessly routed to human experts for resolution.</p></div>
+                    <div class="p-6 rounded-lg bg-green-50 fade-in" style="transition-delay: 500ms;"><h5 class="font-bold text-green-800">Continuous Learning</h5><p class="text-sm text-green-700">The system improves with every interaction and feedback loop.</p></div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="architecture" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold mb-2">How It Works: A Simple & Powerful Flow</h3>
+                    <p class="max-w-2xl mx-auto text-gray-600">Our system is built on a robust architecture that translates a farmer's simple query into an accurate, actionable answer in seconds.</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8 text-center">
+                    <div class="w-full md:w-1/4 fade-in">
+                        <div class="p-6 bg-white rounded-xl shadow-md border-t-4 border-green-500">
+                            <h5 class="font-bold">1. Farmer Input</h5>
+                            <p class="text-sm text-gray-600">Query via Voice, Text, or Image in Malayalam.</p>
+                        </div>
+                    </div>
+                    <div class="text-3xl text-green-500 font-light fade-in" style="transition-delay: 200ms;">&rarr;</div>
+                    <div class="w-full md:w-1/3 fade-in" style="transition-delay: 400ms;">
+                        <div class="p-6 bg-white rounded-xl shadow-md border-t-4 border-orange-500">
+                            <h5 class="font-bold">2. AI Processing Engine</h5>
+                            <ul class="text-sm text-gray-600 list-inside list-disc text-left">
+                                <li>Speech-to-Text Analysis</li>
+                                <li>Image Recognition</li>
+                                <li>Contextual Data Integration</li>
+                                <li>Knowledge Base Query</li>
+                            </ul>
+                        </div>
+                    </div>
+                     <div class="text-3xl text-green-500 font-light fade-in" style="transition-delay: 600ms;">&rarr;</div>
+                    <div class="w-full md:w-1/4 fade-in" style="transition-delay: 800ms;">
+                         <div class="p-6 bg-white rounded-xl shadow-md border-t-4 border-green-500">
+                            <h5 class="font-bold">3. Actionable Output</h5>
+                            <p class="text-sm text-gray-600">Delivers an instant, accurate response or escalates to a human expert.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="roadmap" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold mb-2">Our Development Roadmap</h3>
+                    <p class="max-w-2xl mx-auto text-gray-600">We have a clear, phased plan to bring this vision to life, ensuring robust development, thorough testing, and scalable deployment.</p>
+                </div>
+                 <div class="chart-container fade-in">
+                    <canvas id="roadmapChart"></canvas>
+                </div>
+                <div id="roadmap-details" class="mt-8 max-w-2xl mx-auto text-center p-6 bg-gray-50 rounded-lg min-h-[100px]">
+                    <p class="text-gray-600">Hover over a phase in the chart to see details.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="vision" class="py-20">
+            <div class="container mx-auto px-6">
+                 <div class="text-center mb-12">
+                    <h3 class="text-3xl font-bold mb-2">Conclusion & Future Vision</h3>
+                    <p class="max-w-2xl mx-auto text-gray-600">Our journey doesn't end at launch. We are committed to continuous innovation and expansion to empower every farmer in India.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <div class="fade-in">
+                        <h4 class="text-2xl font-bold mb-4 text-green-700">Empowering Today</h4>
+                        <p class="text-gray-600 mb-4">The Digital Krishi Officer will empower farmers with timely, personalized advice in their native language, reducing their dependency on overburdened systems and improving data-driven decision-making at the grassroots level.</p>
+                        <p class="font-semibold">This is more than an app; it is a vital tool for agricultural empowerment.</p>
+                    </div>
+                     <div class="fade-in" style="transition-delay: 200ms;">
+                        <h4 class="text-2xl font-bold mb-4 text-orange-600">Innovating for Tomorrow</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <span class="text-green-500 font-bold mr-3">&rarr;</span>
+                                <span class="text-gray-700">Expand language support beyond Malayalam to cover all major regional languages.</span>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="text-green-500 font-bold mr-3">&rarr;</span>
+                                <span class="text-gray-700">Integrate more crops and specialized advisory domains like soil health and water management.</span>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="text-green-500 font-bold mr-3">&rarr;</span>
+                                <span class="text-gray-700">Enhance offline capabilities to ensure access in low-connectivity areas.</span>
+                            </li>
+                             <li class="flex items-start">
+                                <span class="text-green-500 font-bold mr-3">&rarr;</span>
+                                <span class="text-gray-700">Partner with government and NGOs to drive widespread adoption and integration.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Team VisionX | Smart India Hackathon</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+    });
+
+    function updateActiveLink() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (pageYOffset >= sectionTop - 60) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', updateActiveLink);
+    updateActiveLink();
+
+    const roadmapData = {
+        labels: [
+            'Phase 1: Research & Data',
+            'Phase 2: AI Model Dev',
+            'Phase 3: UI/UX & Integration',
+            'Phase 4: Escalation & Feedback',
+            'Phase 5: Pilot & Deployment',
+            'Phase 6: Scaling'
+        ],
+        datasets: [{
+            label: 'Timeline (Months)',
+            data: [
+                [0, 2],
+                [2, 6],
+                [6, 8],
+                [8, 10],
+                [10, 12],
+                [12, 14]
+            ],
+            backgroundColor: [
+                'rgba(52, 211, 153, 0.7)',
+                'rgba(251, 146, 60, 0.7)',
+                'rgba(52, 211, 153, 0.7)',
+                'rgba(251, 146, 60, 0.7)',
+                'rgba(52, 211, 153, 0.7)',
+                'rgba(251, 146, 60, 0.7)'
+            ],
+            borderColor: [
+                'rgba(5, 150, 105, 1)',
+                'rgba(234, 88, 12, 1)',
+                 'rgba(5, 150, 105, 1)',
+                'rgba(234, 88, 12, 1)',
+                 'rgba(5, 150, 105, 1)',
+                'rgba(234, 88, 12, 1)'
+            ],
+            borderWidth: 1,
+            barPercentage: 0.6,
+            categoryPercentage: 0.7,
+            borderSkipped: false
+        }]
+    };
+
+    const roadmapDetails = {
+        'Phase 1: Research & Data': 'Duration: 1-2 Months. Focus on gathering comprehensive agricultural data, identifying key farmer queries, and defining the scope for our AI knowledge base.',
+        'Phase 2: AI Model Dev': 'Duration: 3-4 Months. Core development of the AI engine, including fine-tuning LLMs on our collected data and building the natural language processing models for Malayalam.',
+        'Phase 3: UI/UX & Integration': 'Duration: 2 Months. Design and develop an intuitive user interface. Integrate voice, text, and image input functionalities into a seamless mobile-first experience.',
+        'Phase 4: Escalation & Feedback': 'Duration: 1-2 Months. Build the system to escalate complex queries to human experts and create a continuous learning loop based on expert feedback.',
+        'Phase 5: Pilot & Deployment': 'Duration: 2 Months. Conduct a pilot test with a select group of farmers in Kerala to gather real-world feedback, refine the system, and prepare for a wider launch.',
+        'Phase 6: Scaling': 'Duration: Ongoing. Post-launch, we will focus on expanding language support, adding more advisory domains, and scaling our infrastructure for wider adoption.'
+    };
+
+    const roadmapDetailsContainer = document.getElementById('roadmap-details');
+    const ctx = document.getElementById('roadmapChart').getContext('2d');
+    const roadmapChart = new Chart(ctx, {
+        type: 'bar',
+        data: roadmapData,
+        options: {
+            indexAxis: 'y',
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const duration = context.raw[1] - context.raw[0];
+                            return `Duration: ${duration} months`;
+                        }
+                    }
+                }
+            },
+            onHover: (event, chartElement) => {
+                if (chartElement.length > 0) {
+                    const index = chartElement[0].index;
+                    const label = roadmapData.labels[index];
+                    roadmapDetailsContainer.innerHTML = `<p class="font-semibold">${label}</p><p class="text-gray-600 text-sm">${roadmapDetails[label]}</p>`;
+                } else {
+                     roadmapDetailsContainer.innerHTML = `<p class="text-gray-600">Hover over a phase in the chart to see details.</p>`;
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Months'
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+
+});
+</script>
+</body>
+</html>
